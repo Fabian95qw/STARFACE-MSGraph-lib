@@ -49,8 +49,8 @@ I recommend the following permissions:
 - Users.Read.All (Allows to Read all user's full profiles)
 
 Once the permissions are added, admin-consent has to be given by an administrator
-<placeholder Admin-Consent_PNG>
+  ![admin-consent](/img/admin-consent.png "admin-consent")
   
 Now with the Permissions set we can actually use the Moduleblocks
-<placeholder CreateO365Provider _PNG>
+  ![createblock](/img/createblock.png "createblock")
 
