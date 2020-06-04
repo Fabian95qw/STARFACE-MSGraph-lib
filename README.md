@@ -26,7 +26,8 @@ For this you need to login your Azure Portal (https://portal.azure.com)
 And switch over to the Azure-Active-Directory ⇒ App registrations
 
 There you create a new registration
-<Placeholder Registration_PNG>
+  ![create_app](/img/create_app.png "create_app")
+  
 Once the App is created you need to save the Application (client) ID and the Directory (tenant) ID for later use.
 
 We also need a client secret, which you can create in the tab "Certificate & secrets"
