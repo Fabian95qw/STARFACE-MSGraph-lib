@@ -1,5 +1,5 @@
 
-# Starface-Graphlib
+# STARFACE-MSGraph-lib 
 Moduleblocks to use the MS Graph REST-API (O365)
 
 # Available Moduleblocks:
