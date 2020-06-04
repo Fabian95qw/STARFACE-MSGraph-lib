@@ -8,6 +8,13 @@ Moduleblocks to use the MS Graph REST-API (O365)
 - GetContactFoldersforUser -> Returns all ContactFolders for a User (List<Map<String,Object>>)
 - GetContactsforUser -> Returns all Contacts for a User from a folder (List<Map<String,Object>>)
 - GenericRequests -> Used for all kind of requests. Can return a raw JSON-String, a List<Map<String,Object>> or a Map<String,Object> 
+
+# How to use the Moduleblocks
+Under https://github.com/Fabian95qw/STARFACE-MSGraph-lib/tree/master/module you'll find the Library, and an example Module. 
+The library provides you with the building blocks for your own modules.
+You'll find them in the Public Section in Expert Mode
+<Placeholder Development_Moduleblocks>
+
 # Creating an App for Office365 access for your STARFACE
 ## Creating the app
 In order for the Moduleblocks to work on your O365 Platform, you need to supply it with a Tenant-ID, a Client-ID and a Client-Secret.
@@ -34,7 +41,8 @@ I recommend the following permissions:
 - Contacts.Read (Allows to Read contacts in all mailboxes)
 - Users.Read.All (Allows to Read all user's fill profiles)
 
-Once the permissions are added, admin-consent has to be given by an Administrator
+Once the permissions are added, admin-consent has to be given by an administrator
+<placeholder Admin-Consent_PNG>
+Now with the Permissions set we can actually use the Moduleblocks
+<placeholder CreateO365Provider _PNG>
 
-# Download
-In the bin are pre-compiled moduleblocks in the module folder you'll find the pre-built modules for import.
