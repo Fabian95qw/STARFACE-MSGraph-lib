@@ -15,6 +15,8 @@ The library provides you with the building blocks for your own modules.
 
 You'll find them in the Public Section in Expert Mode
 <Placeholder Development_Moduleblocks>
+  ![Moduleblocks](/img/moduleblocks.png "Moduleblocks")
+
 
 # Creating an App for Office365 access for your STARFACE
 ## Creating the app
