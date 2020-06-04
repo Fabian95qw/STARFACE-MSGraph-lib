@@ -30,8 +30,9 @@ There you create a new registration
   
 Once the App is created you need to save the Application (client) ID and the Directory (tenant) ID for later use.
 
+  ![app_info](/img/app_info.png "app_info")
 We also need a client secret, which you can create in the tab "Certificate & secrets"
-<Placeholder Client_Secret_PNG>
+  ![create_secret](/img/create_secret.png "create_secret")
 
 Once the Secret is created, save it as well.
 
