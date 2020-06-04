@@ -34,7 +34,7 @@ I recommend the following permissions:
 - Contacts.Read (Allows to Read contacts in all mailboxes)
 - Users.Read.All (Allows to Read all user's fill profiles)
 
-Once the permissions are added, admin-consent has to be given bei an Administrator
+Once the permissions are added, admin-consent has to be given by an Administrator
 
 # Download
 In the bin are pre-compiled moduleblocks in the module folder you'll find the pre-built modules for import.
