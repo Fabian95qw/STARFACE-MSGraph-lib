@@ -7,7 +7,7 @@ Moduleblocks to use the MS Graph REST-API (O365)
 - GetUsers -> Returns all Users as a List<Map<String, Object>> 
 - GetContactFoldersforUser -> Returns all ContactFolders for a User (List<Map<String,Object>>)
 - GetContactsforUser -> Returns all Contacts for a User from a folder (List<Map<String,Object>>)
-- GenericRequests -> Used for all kind of requests. Can return a raw JSON-String, a List<Map<String,Object>> or a Map<String,Object> 
+- GenericRequests -> Used for all kind of MSGraph REST-API requests. Can return a raw JSON-String, a List<Map<String,Object>> or a Map<String,Object> 
 
 # How to use the Moduleblocks
 Under https://github.com/Fabian95qw/STARFACE-MSGraph-lib/tree/master/module you'll find the Library, and an example Module. 
