@@ -30,7 +30,11 @@ For this change to the tab "API permissions" inside of the STARFACE_App
 There you can add all kind of permissions, depending on what you want to access from the STARFACE
 **Important! You can only use Application Permissions**
 
+I recommend the following permissions:
+- Contacts.Read (Allows to Read contacts in all mailboxes)
+- Users.Read.All (Allows to Read all user's fill profiles)
 
+Once the permissions are added, admin-consent has to be given bei an Administrator
 
 # Download
 In the bin are pre-compiled moduleblocks in the module folder you'll find the pre-built modules for import.
