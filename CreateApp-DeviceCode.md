@@ -47,3 +47,14 @@ The Message needs to get shown to the users, this can be done for example by usi
   ![deviceauth_finish](/img/deviceauth_finish.png "deviceauth_finish.png")
 
 If the User sucessfully logs in and accepts the terms, the provider will automatically continue with the Modulescript.
+
+# Caching Tokens
+By default the Token for delegated Userpermissions run out within an hour in order to avoid this, a refresh token is required.
+The token also is lost, once the module is done, and needs a new token for the next run.
+
+Refresh Tokens can be acquired, by adding the permission "offline_access" to the app (just like in setting app-permissions)
+Once this is done, all we need to do is to create an instance of the library. 
+
+If you have an instance of the library running, the integrated TokenCache Manager will automatically take care of the following:
+- Stores Tokens from the DeviceCodeflow as long as they're still valid. They will also survive a reboot
+- Auto-Refreshes Token 1 Minute before they expire
