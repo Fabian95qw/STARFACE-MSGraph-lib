@@ -25,10 +25,6 @@ There you can add all kind of permissions, depending on what you want to access 
 
 **Important! You can only use Application Permissions**
 
-I recommend the following permissions:
-- Contacts.Read (Allows to Read contacts in all mailboxes)
-- Users.Read.All (Allows to Read all user's full profiles)
-
 Once the permissions are added, admin-consent has to be given by an administrator
   ![admin-consent](/img/admin-consent.png "admin-consent")
   
