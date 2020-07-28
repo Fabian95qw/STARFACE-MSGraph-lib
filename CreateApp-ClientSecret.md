@@ -29,5 +29,5 @@ Once the permissions are added, admin-consent has to be given by an administrato
   ![admin-consent](/img/admin-consent.png "admin-consent")
   
 Now with the Permissions set we can actually use the Moduleblocks
-  ![createblock](/img/createblock.png "createblock")
+  ![createblock](/img/createblock-clientsecret.png "createblock-clientsecret")
 
