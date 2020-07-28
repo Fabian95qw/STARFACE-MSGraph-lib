@@ -2,6 +2,7 @@ package nucom.module.msgraphs.o365provider;
 
 import java.util.List;
 
+import org.apache.commons.logging.Log;
 import org.apache.oltu.oauth2.client.OAuthClient;
 import org.apache.oltu.oauth2.client.URLConnectionClient;
 import org.apache.oltu.oauth2.client.request.OAuthClientRequest;
@@ -17,6 +18,7 @@ import com.microsoft.graph.authentication.IAuthenticationProvider;
 import com.microsoft.graph.http.IHttpRequest;
 import com.microsoft.graph.httpcore.ICoreAuthenticationProvider;
 
+import nucom.module.msgraphs.utility.LogHelper;
 import okhttp3.Request;
 
 public class ClientCredentialProvider extends BaseAuthentication implements IAuthenticationProvider, ICoreAuthenticationProvider{
@@ -31,11 +33,14 @@ public class ClientCredentialProvider extends BaseAuthentication implements IAut
 	 * 
 	 */
 		
+	private Log log = null;
+	
 	public ClientCredentialProvider(String clientId,
 			List<String> scopes,
 			String clientSecret,
 			String tenant,
-			NationalCloud nationalCloud) {
+			NationalCloud nationalCloud, Log log) 
+	{
 		super(	scopes, 
 				clientId,
 				GetAuthority(nationalCloud == null? NationalCloud.Global: nationalCloud, tenant),
@@ -43,6 +48,7 @@ public class ClientCredentialProvider extends BaseAuthentication implements IAut
 				nationalCloud == null? NationalCloud.Global: nationalCloud,
 				tenant,
 				clientSecret);
+		this.log=log;
 	}
 	
 	@Override
@@ -68,7 +74,7 @@ public class ClientCredentialProvider extends BaseAuthentication implements IAut
 				accessToken = getAccessTokenNewRequest(authRequest);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			LogHelper.EtoStringLog(log, e);
 		}
 		return accessToken;
 	}
@@ -100,6 +106,8 @@ public class ClientCredentialProvider extends BaseAuthentication implements IAut
 	String getAccessTokenNewRequest(OAuthClientRequest request) throws OAuthSystemException, OAuthProblemException {
 		OAuthClient oAuthClient = new OAuthClient(new URLConnectionClient());
 		setStartTime(System.currentTimeMillis()); 
+		log.debug(request.getLocationUri());
+		log.debug(request.getBody());
 		setResponse(oAuthClient.accessToken(request)); 
 		return getResponse().getAccessToken();
 	}

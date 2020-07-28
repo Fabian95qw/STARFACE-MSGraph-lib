@@ -20,19 +20,25 @@ import nucom.module.msgraphs.utility.LogHelper;
 
 public class O365Provider 
 {
-	ClientCredentialProvider authProvider = null;
 	IGraphServiceClient GC = null;
 	Log log =null;
 	
 	public O365Provider(String TenantID, String ClientID, String ClientSecret, List<String> Scopes, Log log)
 	{
 		this.log=log;
-		authProvider = new ClientCredentialProvider(ClientID, Scopes, ClientSecret, TenantID, NationalCloud.Global);
+		ClientCredentialProvider authProvider = new ClientCredentialProvider(ClientID, Scopes, ClientSecret, TenantID, NationalCloud.Global, log);
 		GC = GraphServiceClient.builder().authenticationProvider(authProvider).buildClient();
 		GC.validate();
 		
 	}
 	
+	public O365Provider(DeviceCodeFlowProvider DCP, Log log) 
+	{
+		this.log=log;
+		GC = GraphServiceClient.builder().authenticationProvider(DCP).buildClient();
+		GC.validate();
+	}
+
 	public IUserCollectionPage getUsers()
 	{
 		try
@@ -84,11 +90,6 @@ public class O365Provider
 		JSONParser JP = new JSONParser();
 		
 		return (JSONObject) JP.parse(GC.customRequest(SubURL).buildRequest().get().toString());
-	}
-
-	public String Token() 
-	{
-		return authProvider.getAcccessToken();
 	}
 
 	public void tobeta() 
