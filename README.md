@@ -17,3 +17,8 @@ You'll find them in the Public Section in Expert Mode
 
   ![Moduleblocks](/img/moduleblocks.png "Moduleblocks")
 
+
+# Using Moduleblocks with Applicationpermissions (Clientsecret)
+Please look at this guide for creating an App with a Clientsecret: https://github.com/Fabian95qw/STARFACE-MSGraph-lib/blob/master/CreateApp-ClientSecret.md
+
+# Using Moduleblocks with Delegated Userpermissions (DeviceCode)
