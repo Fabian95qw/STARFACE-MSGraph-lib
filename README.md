@@ -22,3 +22,4 @@ You'll find them in the Public Section in Expert Mode
 Please look at this guide for creating an App with a Clientsecret: https://github.com/Fabian95qw/STARFACE-MSGraph-lib/blob/master/CreateApp-ClientSecret.md
 
 # Using Moduleblocks with Delegated Userpermissions (DeviceCode)
+Please look at this guide for creating an App with User Delegated rights https://github.com/Fabian95qw/STARFACE-MSGraph-lib/blob/master/CreateApp-DeviceCode.md
