@@ -29,12 +29,12 @@ public class TokenCache implements Runnable
 	private TokenCacheManager TCM = null;
 	private Log log = null;	
 	
-	public TokenCache(String ClientID, String Token, String RefreshToken, Integer Expires, IRuntimeEnvironment context)
+	public TokenCache(String ClientID, String TenantID, String Token, String RefreshToken, Integer Expires, IRuntimeEnvironment context)
 	{
 		this.log=context.getLog();
 		TCM =(TokenCacheManager)context.provider().fetch(TokenCacheManager.class);
 		
-		TS = new TokenSerial(ClientID, Token, RefreshToken, DateUtils.addSeconds(new Date(), Expires-60).getTime());
+		TS = new TokenSerial(ClientID, TenantID, Token, RefreshToken, DateUtils.addSeconds(new Date(), Expires-60).getTime());
 		
 		log.debug("[TCP] Expires: " + TS.getExpiresDateFormatted());
 		log.debug("[TCP] Schedule in: " + TS.ExpiresinSeconds());
@@ -79,14 +79,14 @@ public class TokenCache implements Runnable
 		 try
 		 {
 		
-			 String BaseURL ="https://login.microsoftonline.com/common/oauth2/v2.0/token";
+			 String BaseURL ="https://login.microsoftonline.com/"+TS.getTenantID()+"/oauth2/v2.0/token";
 			 URL U = new URL (BaseURL);
 			 HTTPC = (HttpsURLConnection)U.openConnection();
 			 HTTPC.setRequestMethod("POST");
 			 HTTPC.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 			
 			 String ID="client_id="+TS.getClientID();
-			 String GrantType="grant_type="+"urn:ietf:params:oauth:grant-type:refresh_token";
+			 String GrantType="grant_type=refresh_token";
 			 String Scope="scope="+encode("offline_access .default");
 			 String ParamToken="refresh_token="+TS.getRefreshToken();
 			 String Param = GrantType+"&"+ID+"&"+Scope+"&"+ParamToken;
@@ -143,7 +143,7 @@ public class TokenCache implements Runnable
 				 log.debug("No Refresh Token provided! Token will run out in:" + Expires+ " Seconds!");
 			 }
 			 
-			 TS = new TokenSerial(TS.getClientID(), Token, RefreshToken, DateUtils.addSeconds(new Date(), Expires-60).getTime());
+			 TS = new TokenSerial(TS.getClientID(), TS.getTenantID(), Token, RefreshToken, DateUtils.addSeconds(new Date(), Expires-60).getTime());
 			 log.debug("New Expire: "+ TS.getExpiresDateFormatted());
 			 TCM.SaveCache(this);
 		 }

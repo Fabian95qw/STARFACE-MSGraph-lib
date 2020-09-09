@@ -8,4 +8,11 @@ public class EnumHelper
 		LIST,
 		MAP,
 	}
+	
+	public enum ProviderType
+	{
+		NONE,
+		Client,
+		DeviceCode
+	}
 }

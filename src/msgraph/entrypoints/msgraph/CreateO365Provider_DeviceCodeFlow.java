@@ -25,8 +25,8 @@ public class CreateO365Provider_DeviceCodeFlow implements IBaseExecutable
 	@InputVar(label="Scopes", description="List of Ms Graph Scopes",type=VariableType.LIST)
 	public List<List<String>> ScopesRaw= null;
 	
-	@InputVar(label="Use Beta-Branch", description="Changes this to a Beta-Branch Provider",type=VariableType.BOOLEAN)
-	public boolean UseBeta=false;
+	@InputVar(label="Branch", description="Change the Branch Provider. DO NOT CHANGE IF YOU DON'T KNOW WHAT YOU'RE DOING",type=VariableType.STRING)
+	public String Branch="https://graph.microsoft.com";
 	
 	@InputVar(label="DeviceCodeFLowProvider", description="Use the DeviceAuthprovider from CreateCodeAuthorization",type=VariableType.OBJECT)
 	public Object ODeviceCodeFLowProvider = null;
@@ -77,10 +77,7 @@ public class CreateO365Provider_DeviceCodeFlow implements IBaseExecutable
 		if(DCP.hasToken())
 		{
 			O365Provider Provider = new O365Provider(DCP, log);
-			if(UseBeta)
-			{
-				Provider.tobeta();
-			}
+			Provider.setBranch(Branch);
 			O365Provider = Provider;
 					
 			log.debug("Provider Sucessfully created!");		

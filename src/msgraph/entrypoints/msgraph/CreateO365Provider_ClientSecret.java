@@ -31,8 +31,8 @@ public class CreateO365Provider_ClientSecret implements IBaseExecutable
 	@InputVar(label="Scopes", description="List of Ms Graph Scopes",type=VariableType.LIST)
 	public List<List<String>> ScopesRaw= null;
 	
-	@InputVar(label="Use Beta-Branch", description="Changes this to a Beta-Branch Provider",type=VariableType.BOOLEAN)
-	public boolean UseBeta=false;
+	@InputVar(label="Branch", description="Change the Branch Provider. DO NOT CHANGE IF YOU DON'T KNOW WHAT YOU'RE DOING",type=VariableType.STRING)
+	public String Branch="https://graph.microsoft.com";
 	
 	@OutputVar(label="O365Provider", description="Return an Office365 Provider",type=VariableType.OBJECT)
 	public Object O365Provider = null;
@@ -67,10 +67,7 @@ public class CreateO365Provider_ClientSecret implements IBaseExecutable
 		log.debug(Scopes);
 		
 		O365Provider Provider = new O365Provider(TenantID, ClientID, ClientSecret, Scopes, context.getLog());
-		if(UseBeta)
-		{
-			Provider.tobeta();
-		}
+		Provider.setBranch(Branch);
 		O365Provider = Provider;
 				
 		log.debug("Provider Sucessfully created!");

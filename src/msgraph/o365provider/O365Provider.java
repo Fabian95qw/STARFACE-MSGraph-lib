@@ -17,19 +17,22 @@ import com.microsoft.graph.requests.extensions.IContactFolderCollectionPage;
 import com.microsoft.graph.requests.extensions.IUserCollectionPage;
 
 import nucom.module.msgraphs.utility.LogHelper;
+import nucom.module.msgraphs.utility.EnumHelper.ProviderType;
 
 public class O365Provider 
 {
 	IGraphServiceClient GC = null;
 	Log log =null;
 	
+	private ProviderType PT = ProviderType.NONE;
+	
 	public O365Provider(String TenantID, String ClientID, String ClientSecret, List<String> Scopes, Log log)
 	{
 		this.log=log;
 		ClientCredentialProvider authProvider = new ClientCredentialProvider(ClientID, Scopes, ClientSecret, TenantID, NationalCloud.Global, log);
 		GC = GraphServiceClient.builder().authenticationProvider(authProvider).buildClient();
-		GC.validate();
-		
+		GC.validate();		
+		PT =ProviderType.Client;
 	}
 	
 	public O365Provider(DeviceCodeFlowProvider DCP, Log log) 
@@ -37,6 +40,7 @@ public class O365Provider
 		this.log=log;
 		GC = GraphServiceClient.builder().authenticationProvider(DCP).buildClient();
 		GC.validate();
+		PT = ProviderType.DeviceCode;
 	}
 
 	public IUserCollectionPage getUsers()
@@ -92,8 +96,23 @@ public class O365Provider
 		return (JSONObject) JP.parse(GC.customRequest(SubURL).buildRequest().get().toString());
 	}
 
-	public void tobeta() 
+	public String getAccessToken()
 	{
-		GC.setServiceRoot("https://graph.microsoft.com/beta");
+		switch(PT)
+		{
+		case Client:
+			ClientCredentialProvider CCP = (ClientCredentialProvider) GC.getAuthenticationProvider();
+			return CCP.getAcccessToken();
+		case DeviceCode:
+			DeviceCodeFlowProvider DCP = (DeviceCodeFlowProvider) GC.getAuthenticationProvider();
+			return DCP.getAccessToken();
+		default:
+			return "__INVALID__TOKEN__";
+		}
+	}
+
+	public void setBranch(String Branch) 
+	{
+		GC.setServiceRoot(Branch);
 	}
 }

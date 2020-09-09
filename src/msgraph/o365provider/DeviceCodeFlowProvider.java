@@ -238,7 +238,7 @@ public class DeviceCodeFlowProvider implements IAuthenticationProvider
 				 {
 					 log.debug("No Refresh Token provided! Token will run out in:" + Expires+ " Seconds!");
 				 }
-				 TC = new TokenCache(ClientID, Token, RefreshToken, Expires.intValue(), context);
+				 TC = new TokenCache(ClientID, TenantID, Token, RefreshToken, Expires.intValue(), context);
 				 TokenCacheManager TCM =(TokenCacheManager)context.provider().fetch(TokenCacheManager.class);
 				 TCM.SaveCache(TC);
 				 break;
@@ -322,5 +322,12 @@ public class DeviceCodeFlowProvider implements IAuthenticationProvider
 		if(TC == null) {return false;}
 		return TC.hasToken();
 	}
+	
+	public String getAccessToken()
+	{
+		if(TC == null) {return "";}
+		return TC.getToken();
+	}
+	
 	
 }
