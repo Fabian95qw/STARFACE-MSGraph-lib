@@ -80,6 +80,7 @@ public class TokenCache implements Runnable
 		 {
 		
 			 String BaseURL ="https://login.microsoftonline.com/"+TS.getTenantID()+"/oauth2/v2.0/token";
+			 log.debug("Contacting: " + BaseURL);
 			 URL U = new URL (BaseURL);
 			 HTTPC = (HttpsURLConnection)U.openConnection();
 			 HTTPC.setRequestMethod("POST");
@@ -126,8 +127,25 @@ public class TokenCache implements Runnable
 			 JSONParser JP = new JSONParser();
 			 JSONObject JSO = (JSONObject)JP.parse(SB.toString());
 			 String Token = (String) JSO.get("access_token");
-			 String SExpires = (String) JSO.get("expires_in");
-			 Integer Expires = Integer.parseInt(SExpires);
+			 Integer Expires=-1;
+			 try
+			 {
+				 String SExpires = (String) JSO.get("expires_in");
+				 Expires = Integer.parseInt(SExpires);
+			 }
+			 catch(Exception e)
+			 {
+				try
+				{
+					Expires = ((Long) JSO.get("expires_in")).intValue();
+				}
+				catch(Exception e1)
+				{
+					LogHelper.EtoStringLog(log, e);
+					LogHelper.EtoStringLog(log, e1);
+				}
+			 }
+				 
 			 
 			 log.debug("New Token: " +Token);
 			 log.debug("Expires: " + Expires);
@@ -151,20 +169,23 @@ public class TokenCache implements Runnable
 		 {
 			 try
 			 {
-				 BufferedReader BR = new BufferedReader(new InputStreamReader(HTTPC.getErrorStream()));
-				 StringBuilder SB = new StringBuilder();
-				 
-				 String Line;
-				 while((Line = BR.readLine()) != null)
+				 LogHelper.EtoStringLog(log, e);
+				 if(HTTPC.getErrorStream() !=  null)
 				 {
-					 SB.append(Line);
+					 BufferedReader BR = new BufferedReader(new InputStreamReader(HTTPC.getErrorStream()));
+					 StringBuilder SB = new StringBuilder();
+					 
+					 String Line;
+					 while((Line = BR.readLine()) != null)
+					 {
+						 SB.append(Line);
+					 }
+					 
+					 BR.close();
+					 HTTPC.disconnect();
+					 
+					 log.debug(SB.toString());
 				 }
-				 
-				 BR.close();
-				 HTTPC.disconnect();
-				 
-				 log.debug(SB.toString());
-				 
 			 }
 			 catch(Exception e1)
 			 {
