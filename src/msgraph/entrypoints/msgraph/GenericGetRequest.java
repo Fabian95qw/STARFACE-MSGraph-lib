@@ -20,8 +20,8 @@ import nucom.module.msgraphs.utility.LogHelper;
 import nucom.module.msgraphs.utility.EnumHelper.OutputType;
 import nucom.module.msgraphs.utility.JSONConverter;
 
-@Function(visibility=Visibility.Public, rookieFunction=false, description="Returns a List of Users")
-public class GenericRequest implements IBaseExecutable 
+@Function(visibility=Visibility.Public, rookieFunction=false, description="Make a generic GET Request")
+public class GenericGetRequest implements IBaseExecutable 
 {
 	//##########################################################################################
 	@InputVar(label="O365Provider", description="Office365 Provider",type=VariableType.OBJECT)
@@ -29,9 +29,6 @@ public class GenericRequest implements IBaseExecutable
 	
 	@InputVar(label="TargetURL", description="Target Sub URL of the GRAPH REST API for example: /users/user@example.com/",type=VariableType.STRING)
 	public String TargetURL="";
-	
-	@InputVar(label="Body", description="",type=VariableType.MAP)
-	public Map<String, String>Body = null;
 	
 	@InputVar(label="OutputType", description="", valueByReferenceAllowed=true)
 	public OutputType OT = OutputType.RAWJSON;
@@ -70,7 +67,7 @@ public class GenericRequest implements IBaseExecutable
 		log.debug("Executing Generic Request:" + TargetURL);
 		try
 		{
-		Object JSON = Provider.genericRequest(TargetURL, Body);
+		Object JSON = Provider.genericGetRequest(TargetURL);
 		
 			switch(OT)
 			{

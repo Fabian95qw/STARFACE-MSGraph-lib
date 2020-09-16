@@ -2,12 +2,14 @@ package nucom.module.msgraphs.o365provider;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.apache.commons.logging.Log;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import com.google.gson.JsonObject;
 import com.microsoft.graph.auth.enums.NationalCloud;
 import com.microsoft.graph.core.ClientException;
 import com.microsoft.graph.models.extensions.IGraphServiceClient;
@@ -89,12 +91,32 @@ public class O365Provider
 		}
 	}
 	
-	public JSONObject genericRequest(String SubURL, Map<String, String>Body) throws ClientException, ParseException
+	public JSONObject genericGetRequest(String SubURL) throws ClientException, ParseException
 	{	
 		JSONParser JP = new JSONParser();
-		
 		return (JSONObject) JP.parse(GC.customRequest(SubURL).buildRequest().get().toString());
 	}
+	
+	public JSONObject genericPutRequest(String SubURL, Map<String, String>Body) throws ClientException, ParseException
+	{	
+		if(Body == null)
+		{
+			log.debug("NO BODY SUPPLIED!");
+			return null;
+		}
+		
+		JsonObject putObject = new JsonObject();
+		
+		for(Entry<String, String> Entry : Body.entrySet())
+		{
+			putObject.addProperty(Entry.getKey(), Entry.getValue());
+		}
+				
+		JSONParser JP = new JSONParser();
+		return (JSONObject) JP.parse(GC.customRequest(SubURL).buildRequest().put(putObject).toString());
+	}
+	
+	
 
 	public String getAccessToken()
 	{

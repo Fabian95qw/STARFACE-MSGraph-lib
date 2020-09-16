@@ -179,7 +179,6 @@ public class DeviceCodeFlowProvider implements IAuthenticationProvider
 		 {
 			 try
 			 {
-			
 				 String BaseURL ="https://login.microsoftonline.com/common/oauth2/v2.0/token";
 				 URL U = new URL (BaseURL);
 				 HTTPC = (HttpsURLConnection)U.openConnection();
@@ -197,6 +196,8 @@ public class DeviceCodeFlowProvider implements IAuthenticationProvider
 				 HTTPC.setRequestProperty("Content-Length", Integer.toString(Data.length));
 				 HTTPC.setUseCaches(false);
 				 HTTPC.setDoOutput(true);
+				 
+				 log.debug("Polling:" + BaseURL);
 				 
 				 DataOutputStream DOS =null;
 				 try
@@ -275,6 +276,8 @@ public class DeviceCodeFlowProvider implements IAuthenticationProvider
 						 log.debug("Token has expired");
 						 return;
 					 default:
+						 log.debug("Unknown error!");
+						 log.debug(Error);
 						 break;
 				 }
 			 }
