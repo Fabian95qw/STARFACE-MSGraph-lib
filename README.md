@@ -5,7 +5,7 @@ Moduleblocks to use the MS Graph REST-API (O365)
 # Available Moduleblocks:
 - CreateO365Provider (App-Secret)-> Creates a Providerobject, is required for any requests. Uses Applicationpermissions
 - CreateO365Provider (DeviceCode)-> Creates a Providerobject, is required for any requests. Uses User Delegated Permissions
-- CreateCodeFlowProvider -> Creates a OAuth2 request using a DeviceCode, so the user tha is being used for the Delegated Permissions can login. Returns a Message with the Steps the user has to do to authenticate, and returns the raw DeviceCodeFlowProvider, for the CreateO365Provider (DeviceCode)
+- CreateCodeFlowProvider -> Creates a OAuth2 request using a DeviceCode, so the user that is being used for the Delegated Permissions can login. Returns a Message with the Steps the user has to do to authenticate, and returns the raw DeviceCodeFlowProvider, for the CreateO365Provider (DeviceCode)
 - GetUsers -> Returns all Users as a List<Map<String, Object>> 
 - GetContactFoldersforUser -> Returns all ContactFolders for a User (List<Map<String,Object>>)
 - GetContactsforUser -> Returns all Contacts for a User from a folder (List<Map<String,Object>>)
